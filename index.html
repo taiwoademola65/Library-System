@@ -68,7 +68,7 @@
                     </div>
                 </div>
                
-                <button type="button" class="btn btn-dark w-100" onclick="addBorrowLog()">Save Borrow Record</button>
+                <button type="button" class="btn btn-dark w-100" onclick="addBorrow()">Save Borrow Record</button>
             </form>
         </div>
     </div>
@@ -103,6 +103,7 @@
             <script>
 
                 let books = [];
+                let borrows = [];
                 const addBook = () => {
                     let titleInput = bookTitle.value;
                     let authorInput = bookAuthor.value;
@@ -140,9 +141,13 @@
                             <td>${currentBook.author}</td>
                             <td>${currentBook.published}</td>
                             </tr>`;
-                    }
 
-                    
+                            borrowBookSelect += ` <option value="${currentBook.title}" ${currentBook.title}</option>`
+                    }                    
+
+                }
+
+                const addBorrow = () => {
 
                 }
             </script>
