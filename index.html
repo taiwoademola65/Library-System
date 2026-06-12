@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container my-5">
+        <h1 class="text-center mb-5 fw-bold text-primary">Library System</h1>
+
+        <div class="row g-4">
+            <div class="col-md-5">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white fw-bold">Add New Book</div>
+                    <div class="card-body">
+                        <form id="bookForm">
+                            <div class="mb-3">
+                                <label for="bookTitle" class="form-label">Book Title</label>
+                                <input type="text" class="form-control" id="bookTitle" required
+                                    placeholder="e.g., Atomic Habits">
+                            </div>
+                            <div class="mb-3">
+                                <label for="bookAuthor" class="form-label">Author</label>
+                                <input type="text" class="form-control" id="bookAuthor" required
+                                    placeholder="e.g., James Clear">
+                            </div>
+                            <div class="mb-3">
+                                <label for="bookPubDate" class="form-label">Publication Date</label>
+                                <input type="date" class="form-control" id="bookPubDate" required>
+                            </div>
+                            <button type="button" class="btn btn-primary w-100" onclick="addBook()">Add Book to
+                                Library</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-7">
+    <div class="card h-100">
+        <div class="card-header bg-dark text-white fw-bold">Record Book Borrowing</div>
+        <div class="card-body">
+            <form id="borrowForm">
+                <div class="mb-3">
+                    <label class="form-label">Borrower's Name</label>
+                    <input type="text" class="form-control" id="borrowerName" placeholder="e.g., Jane Doe">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Select Book from Inventory</label>
+                    <select class="form-select" id="borrowBookSelect">
+                        <option value="" disabled selected>-- Choose a book --</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Date Borrowed</label>
+                        <input type="date" class="form-control" id="borrowDate">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Expected Return Date</label>
+                        <input type="date" class="form-control" id="returnDate">
+                    </div>
+                </div>
+               
+                <button type="button" class="btn btn-dark w-100" onclick="addBorrowLog()">Save Borrow Record</button>
+            </form>
+        </div>
+    </div>
+</div>
+        </div>
+
+        <hr class="my-5">
+
+        <div class="row g-4">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header bg-success text-white fw-bold">Books Available</div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Published</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="booksTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+
+                let books = [];
+                const addBook = () => {
+                    let titleInput = bookTitle.value;
+                    let authorInput = bookAuthor.value;
+                    let pubDateInput = bookPubDate.value;
+                    // console.log(titleInput);
+                    // console.log(authorInput);
+                    // console.log(pubDateInput);
+
+                    if (titleInput === '' || authorInput === '' || pubDateInput === '') {
+                        alert('Please fill out all fields before adding a book.')
+                        // return;
+                    }else{
+                    let newBook = {
+                        id: Date.now().toString(),
+                        title: titleInput,
+                        author: authorInput,
+                        published: pubDateInput,
+                    }
+                    books.push(newBook)
+                    bookTitle.value = '';
+                    bookAuthor.value = '';
+                    bookPubDate.value = '';
+                }
+                displayBooks();
+                }
+
+                const displayBooks = () =>{
+                    let booksTable = document.getElementById('booksTableBody');
+                    booksTable.innerHTML = '';
+
+                    for (let i = 0; i < books.length; i++) {
+                        let currentBook = books[i];
+                        booksTable.innerHTML = `<tr>
+                            <td><strong>${currentBook.title}</strong></td>
+                            <td>${currentBook.author}</td>
+                            <td>${currentBook.published}</td>
+                            </tr>`;
+                    }
+
+                    
+
+                }
+            </script>
+</body>
+
+</html>
+
+
+<!-- Build a library system Let us be able to add books, with every necessary details like author, date etc On the same page, let's be able to keep record of book borrowing Someone comes to borrow a book, we open a drop-down of the book list, select the one they are borrowing, type date they borrowed it and the day they want to return it, then save it. with just html bootstrap and JavaScript -->
