@@ -49,12 +49,12 @@
             <form id="borrowForm">
                 <div class="mb-3">
                     <label class="form-label">Borrower's Name</label>
-                    <input type="text" class="form-control" id="borrowerName" placeholder="e.g., Jane Doe">
+                    <input type="text" class="form-control" id="borrowerInput" placeholder="e.g., Joseph">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Select Book from Inventory</label>
                     <select class="form-select" id="borrowBookSelect">
-                        <option value="" disabled selected>-- Choose a book --</option>
+                        <option value="DATA_FOR_JAVASCRIPT" disabled selected>Choose a book</option>
                     </select>
                 </div>
                 <div class="row">
@@ -136,19 +136,37 @@
 
                     for (let i = 0; i < books.length; i++) {
                         let currentBook = books[i];
-                        booksTable.innerHTML = `<tr>
+                        booksTable.innerHTML += `<tr>
                             <td><strong>${currentBook.title}</strong></td>
                             <td>${currentBook.author}</td>
                             <td>${currentBook.published}</td>
                             </tr>`;
 
-                            borrowBookSelect += ` <option value="${currentBook.title}" ${currentBook.title}</option>`
+                            borrowBookSelect.innerHTML = `<option value="${currentBook.title}" ${currentBook.title}</option>`
                     }                    
 
                 }
 
                 const addBorrow = () => {
+                    let borrowerName = borrowerInput.value;
+                    let selectedBook = borrowBookSelect.value;
+                    let startDate = borrowDate.value;
+                    let endDate = returnDate.value;
 
+                    if (borrowerName === '' || selectedBook === '' || startDate === '' || endDate === '') {
+                        alert('Please fill out all borrowing fields.')
+                    }
+
+                    let newBorrow = {
+                        borrower : borrowerName,
+                        bookTitle : selectedBook,
+                        dateOut : startDate,
+                        dateIn : endDate
+
+                    }
+                    borrows.push(newBorrow)
+
+                    borrowForm.reset();
                 }
             </script>
 </body>
