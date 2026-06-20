@@ -1,3 +1,34 @@
+
+
+const search = () => {
+    let searchInput = document.getElementById('searchBtn').value;
+    let searchBooks = [];
+    for (let i = 0; i < books.length; i++) {
+        let book = books[i];
+        if (book.title.toLowerCase().includes(searchInput.toLowerCase()) || book.author.toLowerCase().includes(searchInput.toLowerCase())) {
+            searchBooks.push(book);
+        }
+    }
+    displayBooks(searchBooks);
+
+    // compare what the user is typing(user input as the) with what we already saved in the title.
+    // or find out if the words users are typing are inside addBook.
+    // 
+}
+
+// const showBooks = (myArray) => {
+//     for (i = 0; i < myArray.length; i++) {
+//         let show = myArray[i]
+//         displayBk.innerHTML += `<tr>
+//         <td>${show.title}</td>
+//         <td>${show.author}</td>
+//         </tr>`;
+//     }
+// }
+
+
+
+
 let books = JSON.parse(localStorage.getItem('savedBooks')) || [];
 let borrows = JSON.parse(localStorage.getItem('savedBorrows')) || [];
 const addBook = () => {
@@ -25,25 +56,33 @@ const addBook = () => {
         bookAuthor.value = '';
         bookPubDate.value = '';
     }
-    displayBooks();
+    displayBooks(books);
 }
 
-const displayBooks = () => {
+const displayBooks = (bookArray) => {
     let booksTable = document.getElementById('booksTableBody');
     booksTable.innerHTML = '';
 
     // borrowBookSelect.innerHTML = '';
     borrowBookSelect.innerHTML = `<option value="" disabled selected>Choose a book</option>`;
-
-    for (let i = 0; i < books.length; i++) {
-        let currentBook = books[i];
+    bookArray.map((book) => {
         booksTable.innerHTML += `<tr>
-                            <td><strong>${currentBook.title}</strong></td>
-                            <td>${currentBook.author}</td>
-                            <td>${currentBook.published}</td>
-                            </tr>`;
-        borrowBookSelect.innerHTML += `<option value="${currentBook.title}">${currentBook.title}</option>`;
-    }
+                <td><strong>${book.title}</strong></td>
+                <td>${book.author}</td>
+                <td>${book.published}</td>
+                </tr>`;
+        borrowBookSelect.innerHTML += `<option value="${book.title}">${book.title}</option>`;
+    })
+
+    //  for (let i = 0; i < books.length; i++) {
+    //         let currentBook = books[i];
+    //         booksTable.innerHTML += `<tr>
+    //                             <td><strong>${currentBook.title}</strong></td>
+    //                             <td>${currentBook.author}</td>
+    //                             <td>${currentBook.published}</td>
+    //                             </tr>`;
+    //         borrowBookSelect.innerHTML += `<option value="${currentBook.title}">${currentBook.title}</option>`;
+    //     }
 
 }
 
@@ -86,11 +125,10 @@ const displayBorrow = () => {
                             <td><strong>${currentBorrow.bookTitle}</strong></td>
                             <td><span class="badge bg-secondary">${currentBorrow.dateOut}</span></td>
                             <td><span class="badge bg-danger">${currentBorrow.dateIn}</span></td>
-                            
                             </tr>`;
     }
 
 }
 
-displayBooks();
+displayBooks(books);
 displayBorrow();

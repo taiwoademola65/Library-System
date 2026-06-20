@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    button {
+      border-radius: 100px;
+      border: none;
+      background-color: wheat;
+      font-size: 30px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .container {
+      width: 270px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      row-gap: 10px;
+      column-gap: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <input id="showInput" type="number" name="" placeholder="0"><br> <br>
+  <div class="container">
+    <button onclick="percentageBtn()" id="percent">%</button>
+    <button onclick="clearBtn()" id="clear">CE</button>
+    <button onclick="numberBtn(7)" id="seven">7</button>
+    <button onclick="numberBtn(8)" id="eight">8</button>
+    <button onclick="numberBtn(9)" id="nine">9</button>
+    <button onclick="divideBtn()" id="divide">/</button>
+    <button onclick="numberBtn(4)" id="four">4</button>
+    <button onclick="numberBtn(5)" id="five">5</button>
+    <button onclick="numberBtn(6)" id="six">6</button>
+    <button onclick="deleteBtn()" id="delete">X</button>
+    <button onclick="numberBtn(1)">1</button>
+    <button onclick="numberBtn(2)">2</button>
+    <button onclick="numberBtn(3)">3</button>
+    <button onclick="minusBtn()">-</button>
+    <button onclick="numberBtn(0)">0</button>
+    <button onclick="dotBtn()">.</button>
+    <button onclick="equalBtn()">=</button>
+    <button onclick="plusBtn()">+</button>
+  </div>
+
+
+  <script>
+    const numberBtn = (n) =>{
+      showInput.value += n
+    }
+  
+    const deleteBtn = () => {
+      let deleteInput = document.getElementById('delete').innerHTML;
+      showInput.value += deleteInput;
+    }
+  </script>
+</body>
+
+</html>
