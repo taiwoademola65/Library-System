@@ -28,8 +28,9 @@
 <body>
   <input id="showInput" type="number" name="" placeholder="0"><br> <br>
   <div class="container">
+    <button onclick="deleteBtn()" id="delete">✕</button>
+    <button onclick="clearBtn()" id="clear">C</button>
     <button onclick="percentageBtn()" id="percent">%</button>
-    <button onclick="clearBtn()" id="clear">CE</button>
     <button onclick="numberBtn(7)" id="seven">7</button>
     <button onclick="numberBtn(8)" id="eight">8</button>
     <button onclick="numberBtn(9)" id="nine">9</button>
@@ -37,27 +38,46 @@
     <button onclick="numberBtn(4)" id="four">4</button>
     <button onclick="numberBtn(5)" id="five">5</button>
     <button onclick="numberBtn(6)" id="six">6</button>
-    <button onclick="deleteBtn()" id="delete">X</button>
     <button onclick="numberBtn(1)">1</button>
     <button onclick="numberBtn(2)">2</button>
     <button onclick="numberBtn(3)">3</button>
     <button onclick="minusBtn()">-</button>
     <button onclick="numberBtn(0)">0</button>
     <button onclick="dotBtn()">.</button>
-    <button onclick="equalBtn()">=</button>
+    <button onclick="equalsBtn()">=</button>
     <button onclick="plusBtn()">+</button>
   </div>
 
 
   <script>
-    const numberBtn = (n) =>{
+
+    const numberBtn = (n) => {
       showInput.value += n
     }
-  
-    const deleteBtn = () => {
-      let deleteInput = document.getElementById('delete').innerHTML;
-      showInput.value += deleteInput;
+
+    const plusBtn = () => {
+      let sumInput = document.getElementById('showInput');
+      sumInput.value += "+"
     }
+
+
+    const equalsBtn = () => {
+      let equalsInput = document.getElementById('showInput');
+      equalsInput.value = eval(equalsInput.value);
+    }
+
+
+
+    const deleteBtn = () => {
+      let deleteInput = document.getElementById('showInput')
+      deleteInput.value = deleteInput.value.slice(0, -1)
+    }
+
+    const clearBtn = () => {
+      let userInput = document.getElementById('showInput');
+      userInput.value = ''
+    }
+    // clearBtn();
   </script>
 </body>
 

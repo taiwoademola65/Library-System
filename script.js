@@ -3,7 +3,7 @@
 const search = () => {
     let searchInput = document.getElementById('searchBtn').value;
     let searchBooks = [];
-    for (let i = 0; i < books.length; i++) {
+    for (let i = 0; i < books.length; i++){
         let book = books[i];
         if (book.title.toLowerCase().includes(searchInput.toLowerCase()) || book.author.toLowerCase().includes(searchInput.toLowerCase())) {
             searchBooks.push(book);
