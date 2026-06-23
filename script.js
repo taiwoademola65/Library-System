@@ -26,9 +26,6 @@ const search = () => {
 //     }
 // }
 
-
-
-
 let books = JSON.parse(localStorage.getItem('savedBooks')) || [];
 let borrows = JSON.parse(localStorage.getItem('savedBorrows')) || [];
 const addBook = () => {
@@ -127,7 +124,6 @@ const displayBorrow = () => {
                             <td><span class="badge bg-danger">${currentBorrow.dateIn}</span></td>
                             </tr>`;
     }
-
 }
 
 displayBooks(books);
